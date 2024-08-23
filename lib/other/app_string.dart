@@ -1,0 +1,23 @@
+const appName = "Demo App";
+const ageLabel = "Age";
+const phone = "Phone";
+const DOB = "DOB";
+const searchNameOrSsn = "Search name or ssn.";
+
+const companyDetail = "Company Detail";
+const name = "Name";
+const title = "Title";
+const companyAddress = "Company Address";
+const address = "Address";
+const city = "City";
+const state = "State";
+const stateCode = "State Code";
+const postalCode = "Postal Code";
+const country = "Country";
+const fullAddress = "Full Address";
+const bankDetails = "Bank Details";
+const cardExpire = "Card Expire";
+const cardNumber = "Card Number";
+const cardType = "Card Type";
+const currency = "Currency";
+const someThingWentWrong = "Something went wrong";
