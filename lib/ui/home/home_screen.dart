@@ -18,22 +18,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    Future.delayed(
+      Duration.zero,
+      () {
+        if (navigatorKey.currentContext != null) {
+          navigatorKey.currentContext!.read<HomeProvider>().init();
+        }
+      },
+    );
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(
-        Duration.zero,
-        () {
-          if (navigatorKey.currentContext != null) {
-            navigatorKey.currentContext!.read<HomeProvider>().init();
-          }
-        },
-      );
-    });
-    super.didChangeDependencies();
   }
 
   TextEditingController searchController = TextEditingController();
@@ -41,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeProvider>(
-      builder: (context, value, child) {
+      builder: (context, provider, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.blueAccent,
@@ -75,13 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               FocusManager.instance.primaryFocus?.unfocus();
                               searchController.clear();
-                              Provider.of<HomeProvider>(context, listen: false)
-                                  .onChange("");
+                              provider.onChange("");
                             },
                             child: const Icon(Icons.close),
                           ),
                           onChanged: (value) {
-                            context.read<HomeProvider>().onChange(value);
+                            provider.onChange(value);
                           },
                         ),
                       ],
@@ -93,9 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         top: 8,
                         bottom: 8,
                       ),
-                      itemCount: value.searchUserList.length,
+                      itemCount: provider.searchUserList.length,
                       itemBuilder: (context, index) {
-                        var user = value.searchUserList[index];
+                        var user = provider.searchUserList[index];
                         return UserCard(
                           user: user,
                           onTap: () {
@@ -113,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-              if (value.isLoading)
+              if (provider.isLoading)
                 const Positioned(
                   top: 0,
                   bottom: 0,

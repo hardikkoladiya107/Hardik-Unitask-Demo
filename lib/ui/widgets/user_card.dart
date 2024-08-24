@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:unitask_practicle_hardik/model/user_model.dart';
 import 'package:unitask_practicle_hardik/other/extensions.dart';
 
-import '../../other/app_string.dart';
 import 'app_image.dart';
 
 class UserCard extends StatelessWidget {
@@ -45,32 +44,26 @@ class UserCard extends StatelessWidget {
                   ("${user?.firstName} ${user?.lastName}").text(
                     fontWeight: FontWeight.w600,
                   ),
-                  (user?.email ?? "").text(
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w500,
-                  ),
                   Row(
                     children: [
-                      "$ageLabel :- ".text(
+                      Expanded(
+                          child: (user?.email ?? "").text(
+                        fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w500,
+                      )),
+                      Expanded(
+                        child: "${user?.age ?? ""}".text(),
                       ),
-                      "${user?.age ?? ""}".text(),
                     ],
                   ),
                   Row(
                     children: [
-                      "$phone :- ".text(
-                        fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: (user?.phone ?? "").text(),
                       ),
-                      (user?.phone ?? "").text(),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      "$DOB :- ".text(
-                        fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: (user?.birthDate ?? "").text(),
                       ),
-                      (user?.birthDate ?? "").text(),
                     ],
                   )
                 ],
